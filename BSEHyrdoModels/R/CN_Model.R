@@ -1,5 +1,5 @@
 CN_Model <-
-function(fnc_CNModel, CNavg = 75,IaFrac = 0.05,fnc_slope=0, 
+function(fnc_CNModel, fnc_CNavg = 75,IaFrac = 0.05,fnc_slope=0, 
                   fnc_aspect=0,func_DAWC=.3,func_z=1000,fnc_fcres=.3,TempBias=-3) {
   
   # Energy Balance based Snow Accumulation 
@@ -34,11 +34,11 @@ function(fnc_CNModel, CNavg = 75,IaFrac = 0.05,fnc_slope=0,
   fnc_CNModel$S =0 # Initializing S
   fnc_CNModel$Qpred=0 # Initializing Qpred
   attach(fnc_CNModel)
-  SSCNavg=(1000/CNavg-10)*25.4
+  SSCNavg=(1000/fnc_CNavg-10)*25.4
   SSCN=SoilStorage(S_avg=SSCNavg, field_capacity=func_DAWC*.9,
                    soil_water_content=0.1*func_DAWC, porosity=func_DAWC)
   Ia_init=IaFrac*SSCN   
-  fnc_CNModel$CNavg = CNavg
+  fnc_CNModel$CNavg = fnc_CNavg
   fnc_CNModel$SSCNavg = SSCNavg
   fnc_CNModel$SSCN = SSCN
   detach(fnc_CNModel)
